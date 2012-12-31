@@ -42,3 +42,40 @@ def get_realtime_title(encoding="UTF-8"):
         result_list.append(info_dict)
         
     return result_list
+
+def save_realtime_title(path="chinatime_realtime_title", append=False,
+                        encoding='UTF-8'):
+    """
+    """
+    
+    title_info = get_realtime_title(encoding)
+    if append:
+        fi = list(open(path, "r").readlines())
+        if title_info[0]['title'] in fi[0]:
+            return 0
+        
+        append_list = []
+        for info in title_info:
+            if info['title'] in fi[0]:
+                break
+            
+            #print info['title']
+            
+            append_list.append("%s | %s | %s\n" %
+                      (info['title'], info['time'], info['url']))
+        
+        fo = open(path, "w")
+        for info in append_list:
+            fo.write(info)
+        for info in fi:
+            fo.write(info)
+        fo.close()        
+    else:
+        fo = open(path, "w")
+        for info in title_info:
+            fo.write("%s | %s | %s\n" %
+                     (info['title'], info['time'], info['url']))
+        
+        fo.close()
+        
+    return 1
