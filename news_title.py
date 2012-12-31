@@ -27,3 +27,5 @@ import timeit
 #    fi.close()
 #    
 #print "END OF TEST!"
+
+print appledaily.save_realtime_title(append=True)
