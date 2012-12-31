@@ -13,7 +13,7 @@ Including realtime news and old article.
 
 __author__ = "GrapherD (LouieLu) (grapherd at gmail.com)"
 __license__ = "MIT"
-__version__ = "0.01"
+__version__ = "0.0.2"
 
 from gettitle import *
 
