@@ -17,13 +17,15 @@ import timeit
 #print t.timeit(number=10)
 
 # RealTime title test
-newspaper = newstitle.support_news
-for publisher in newspaper:
-    fi = open("%s_realtime_title" % (publisher), "w")
-    title = eval("%s.get_realtime_title()" % (publisher))
-    for info in title:
-        fi.write("%s | %s | %s\n" % (info['title'], info['time'], info['url'].encode('utf-8')))
-    
-    fi.close()
-    
-print "END OF TEST!"
+#newspaper = newstitle.support_news
+#for publisher in newspaper:
+#    fi = open("%s_realtime_title" % (publisher), "w")
+#    title = eval("%s.get_realtime_title()" % (publisher))
+#    for info in title:
+#        fi.write("%s | %s | %s\n" % (info['title'], info['time'], info['url'].encode('utf-8')))
+#    
+#    fi.close()
+#    
+#print "END OF TEST!"
+
+print appledaily.save_realtime_title(append=True)

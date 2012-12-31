@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
       name='newstitle',
-      version='0.0.1',
+      version='0.0.2',
       packages=['newstitle', 'newstitle.gettitle'],
       author='GrapherD',
       author_email='grapherd@gmail.com',

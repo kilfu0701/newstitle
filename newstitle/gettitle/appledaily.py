@@ -55,3 +55,64 @@ def get_realtime_title(pages=5, encoding="UTF-8"):
             result_list.append(info_dict)
 
     return result_list
+
+def save_realtime_title(filename="appledaily_realtime_title", append=False,
+                        pages=5, encoding='UTF-8'):
+    """
+    Save realtime title to text file.
+    the order is: title | time | url
+    
+    *filename*: the file you save, default is appledaily_realtime_title
+    
+    *append*: allow you just append new title to old file, if the file doesnt'
+              exist, it will create a new one.
+    
+    *pages*: get page 1 to pages, default is 5 pages
+              
+    *encoding*: html text encoding
+    
+    return: append=False: 1 = done;
+            append=True: 0 = no change to title,
+                         1 = append title finish (or a new one).
+    """
+    
+    title_info = get_realtime_title(pages=pages, encoding=encoding)
+    if append:
+        try:
+            fi = open(filename, "r")
+            fi = list(open(filename, "r").readlines())
+            if fi == []:
+                raise IOError
+        except IOError, error_message:
+            f = open(filename, "w")
+            f.close()
+            fi = [""]
+        
+        if title_info[0]['title'] in fi[0]:
+            return 0
+        
+        append_list = []
+        for info in title_info:
+            if info['title'] in fi[0]:
+                break
+            
+            #print info['title']
+            
+            append_list.append("%s | %s | %s\n" %
+                      (info['title'], info['time'], info['url'].encode(encoding)))
+        
+        fo = open(filename, "w")
+        for info in append_list:
+            fo.write(info)
+        for info in fi:
+            fo.write(info)
+        fo.close()        
+    else:
+        fo = open(filename, "w")
+        for info in title_info:
+            fo.write("%s | %s | %s\n" %
+                     (info['title'], info['time'], info['url']))
+        
+        fo.close()
+        
+    return 1
