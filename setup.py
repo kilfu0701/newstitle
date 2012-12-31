@@ -1,7 +1,11 @@
+# !/usr/bin/env python
+
+from distutils.core import setup
+
 setup(
-      name='NewsTitle',
+      name='newstitle',
       version='0.0.1',
-      packages=['newstitle'],
+      packages=['newstitle', 'newstitle.gettitle'],
       author='GrapherD',
       author_email='grapherd@gmail.com',
       license='MIT',
@@ -9,9 +13,9 @@ setup(
       description="Catching Taiwan Newspaper title",
       entry_points ={
         'console_scripts':[
-            'SlideGen=slidegen.SlideGen:Main'
+            'newstitle=newstitle'
         ]
       },
-      keywords ='html5 slide generator',
-      url='https://github.com/reyoung/SlideGen'
+      keywords ='news taiwan title',
+      url='https://github.com/grapherd/newstitle'
 )
