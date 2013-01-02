@@ -27,7 +27,7 @@ def get_realtime_title(pages=5, encoding="UTF-8"):
     
     for page in xrange(1, pages + 1):
         response, content = h.request("%s/index/type/apple/page/%d" % (news_list_url, page))
-        html = lxml.html.fromstring(content)
+        html = lxml.html.fromstring(content.decode('utf-8', 'ignore'))
         html.make_links_absolute(base_url)
 
         # Get news-list section
@@ -39,13 +39,18 @@ def get_realtime_title(pages=5, encoding="UTF-8"):
         for title_info in li:
             news_url = list(title_info.iterlinks())[0][2]
             info_list = map(lambda x: x.text_content().encode(encoding), list(title_info))
-            info_list = info_list[0].strip("\r\n ").replace("\n", "")
+            #info_list = info_list[0].strip("\r\n ").replace("\n", "")
             
-            time = info_list[:5]
-            category = info_list[5:11]
-            title = info_list[11:].strip("\r\n ")
-            title = title[: title.rfind("(") - 1]
-                        
+            #time = info_list[:5]
+            #category = info_list[5:11]
+            #title = info_list[11:].strip("\r\n ")
+            #title = title[: title.rfind("(") - 1]
+            
+            arr = [i.strip() for i in info_list[0].split("\n")]
+            time = arr[1][:5]
+            category = arr[1][5:]
+            title = arr[2]
+            
             try:
                 info_dict = {"title": title, "time": time,
                             "category": category, "url": news_url}

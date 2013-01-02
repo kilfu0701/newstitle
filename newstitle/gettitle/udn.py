@@ -22,7 +22,7 @@ def get_realtime_title(encoding="UTF-8"):
     
     response, content = h.request(news_list_url)
     
-    html = lxml.html.fromstring(content)
+    html = lxml.html.fromstring(content.decode('big5', 'ignore'))
     html.make_links_absolute(base_url)
 
     # Get news-list section

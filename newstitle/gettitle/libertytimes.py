@@ -26,7 +26,7 @@ def get_realtime_title(pages=5, encoding="UTF-8"):
     
     for page in xrange(1, pages + 1):
         response, content = h.request("%s&ipage=%d" % (news_list_url, page))
-        html = lxml.html.fromstring(content)
+        html = lxml.html.fromstring(content.decode('utf-8', 'ignore'))
         html.make_links_absolute(base_url)
 
         # Get news-list section
